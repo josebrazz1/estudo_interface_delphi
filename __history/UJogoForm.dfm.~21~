@@ -2,8 +2,8 @@ object FormJogo: TFormJogo
   Left = 0
   Top = 0
   Caption = 'Jogo'
-  ClientHeight = 229
-  ClientWidth = 282
+  ClientHeight = 303
+  ClientWidth = 377
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,13 +14,27 @@ object FormJogo: TFormJogo
   Position = poScreenCenter
   OnCreate = FormCreate
   DesignSize = (
-    282
-    229)
+    377
+    303)
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 162
+    Width = 57
+    Height = 13
+    Caption = 'Requisito(s)'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 116
+    Width = 52
+    Height = 13
+    Caption = 'Plataforma'
+  end
   object Button1: TButton
     Left = 8
-    Top = 196
+    Top = 270
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -31,7 +45,7 @@ object FormJogo: TFormJogo
   object txtNomeJogo: TEdit
     Left = 8
     Top = 8
-    Width = 267
+    Width = 362
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
@@ -40,7 +54,7 @@ object FormJogo: TFormJogo
   object txtDtLancamento: TEdit
     Left = 8
     Top = 35
-    Width = 267
+    Width = 362
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 2
@@ -49,7 +63,7 @@ object FormJogo: TFormJogo
   object txtGenero: TEdit
     Left = 8
     Top = 62
-    Width = 266
+    Width = 361
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
@@ -58,28 +72,41 @@ object FormJogo: TFormJogo
   object txtDesenvolvedor: TEdit
     Left = 8
     Top = 89
-    Width = 266
+    Width = 361
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
     TextHint = 'Desenvolvedor'
   end
-  object cbDispositivo: TComboBox
+  object cbRequisitos: TComboBox
     Left = 8
-    Top = 116
-    Width = 235
+    Top = 181
+    Width = 330
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
   end
   object btnAbreDispositivoForm: TButton
-    Left = 249
-    Top = 116
+    Left = 344
+    Top = 179
     Width = 25
     Height = 25
     Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 6
     OnClick = btnAbreDispositivoFormClick
+  end
+  object cbDispositivo: TComboBox
+    Left = 8
+    Top = 135
+    Width = 361
+    Height = 21
+    ItemIndex = 0
+    TabOrder = 7
+    Text = 'PC'
+    OnChange = cbDispositivoChange
+    Items.Strings = (
+      'PC'
+      'Console')
   end
 end

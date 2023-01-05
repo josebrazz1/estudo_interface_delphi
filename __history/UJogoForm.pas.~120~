@@ -24,6 +24,7 @@ type
     procedure AdicionarNovoDispositivo;
     procedure btnAbreDispositivoFormClick(Sender: TObject);
     procedure cbDispositivoChange(Sender: TObject);
+    procedure LimpaCampos(form : TForm);
   private
     { Private declarations }
   public
@@ -40,9 +41,9 @@ implementation
 uses UJogoInterfaces, UJogoClasses, UDispositivoForm;
 
 var
-  dispositivos : TIniFile;
+  plataformas : TIniFile;
   iniSections : TStringList;
-  i, memRam, memVideo, espacoDisco : Integer;
+  memRam, memVideo, espacoDisco : Integer;
 
 procedure TFormJogo.Button1Click(Sender: TObject);
 begin
@@ -53,32 +54,34 @@ begin
 end;
 
 procedure TFormJogo.cbDispositivoChange(Sender: TObject);
+var
+  i : Integer;
 begin
   {Se a combo estiver no índice 0, ou seja, se estiver selecionado "PC"...}
   if cbDispositivo.ItemIndex = 0 then
     {...então seleciona o arquivo ini contendo as informações dos computadores}
-    dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini')
+    plataformas := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini')
   else
     {...caso contrário, seleciona o ini contendo os nomes de consoles}
-    dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Consoles.ini');
+    plataformas := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Consoles.ini');
 
   {Instancia a StringList}
   iniSections := TStringList.Create;
 
   {Lê as seções do arquivo ini}
-  dispositivos.ReadSections(iniSections);
+  plataformas.ReadSections(iniSections);
 
   {Limpa a combo para novo preechimento}
   cbRequisitos.Clear;
 
   {Se o arquivo ini conter o trecho "PCs" então selleciona o respectivo ini}
-  if dispositivos.FileName.Contains('PCs.ini') then
+  if plataformas.FileName.Contains('PCs.ini') then
   begin
     for i := 0 to iniSections.Create.Count - 1 do
     begin
-      memRam := dispositivos.ReadInteger(iniSections.Strings[i],'memRam',0);
-      memVideo := dispositivos.ReadInteger(iniSections.Strings[i],'memVideo',0);
-      espacoDisco := dispositivos.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
+      memRam := plataformas.ReadInteger(iniSections.Strings[i],'memRam',0);
+      memVideo := plataformas.ReadInteger(iniSections.Strings[i],'memVideo',0);
+      espacoDisco := plataformas.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
 
       cbRequisitos.Items.Add('RAM: ' + IntToStr(memRam) + ' GB ' +
                                 ' | Memória de Vídeo: ' + IntToStr(memVideo) + ' GB ' +
@@ -99,19 +102,19 @@ begin
 
   {Limpa os objetos da memória}
   FreeAndNil(iniSections);
-  FreeAndNil(dispositivos);
+  FreeAndNil(plataformas);
 end;
 
 procedure TFormJogo.FormCreate(Sender: TObject);
 var
-  nome : String;
+  i : Integer;
 begin
   {Habilita a opção de mostrar se houveram vazamentos de memória ao decorrer da
   execução do programa}
   ReportMemoryLeaksOnShutdown := True;
 
   {Alimenta combo de dispositivos através no arquivo ini}
-  dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini');
+  plataformas := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini');
 
   {nome := dispositivos.ReadString('PC1','nome','');
   memRam := dispositivos.ReadInteger('PC1','memRam',0);
@@ -119,13 +122,13 @@ begin
   espacoDisco := dispositivos.ReadInteger('PC1','espacoDisco',0);}
 
   iniSections := TStringList.Create;
-  dispositivos.ReadSections(iniSections);
+  plataformas.ReadSections(iniSections);
 
   for i := 0 to iniSections.Create.Count - 1 do
   begin
-    memRam := dispositivos.ReadInteger(iniSections.Strings[i],'memRam',0);
-    memVideo := dispositivos.ReadInteger(iniSections.Strings[i],'memVideo',0);
-    espacoDisco := dispositivos.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
+    memRam := plataformas.ReadInteger(iniSections.Strings[i],'memRam',0);
+    memVideo := plataformas.ReadInteger(iniSections.Strings[i],'memVideo',0);
+    espacoDisco := plataformas.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
 
     cbRequisitos.Items.Add('RAM: ' + IntToStr(memRam) + ' GB ' +
                             ' | Memória de Vídeo: ' + IntToStr(memVideo) + ' GB ' +
@@ -135,7 +138,7 @@ begin
   cbRequisitos.ItemIndex := 0;
 
   FreeAndNil(iniSections);
-  FreeAndNil(dispositivos);
+  FreeAndNil(plataformas);
 end;
 
 procedure TFormJogo.AdicionarNovoJogo(pNome,
@@ -144,8 +147,6 @@ var
   jogo : IJogo;
   genero : IGenero;
   desenvolvedor : IDesenvolvedor;
-
-  flLinha, flConteudo, flPrimeiraLinha : String;
 
   strList : TStringList;
 
@@ -201,8 +202,8 @@ begin
       for i := 0 to strList.Count - 1 do
         Writeln(fl, strList.Strings[i]);
 
-      Writeln(fl, cbDispositivo.Text);
-      Writeln(fl, cbRequisitos.Text);
+      Writeln(fl, 'Plataforma: ' + cbDispositivo.Text);
+      Writeln(fl, 'Requisito(s): ' + cbRequisitos.Text);
 
       {Após terminar a escrita, fecha o arquivo}
       CloseFile(fl);
@@ -213,6 +214,11 @@ begin
   finally
     FreeAndNil(strList);
   end;
+
+  ShowMessage('Adicionado!');
+
+  {Limpa todos os TEdits do form}
+  LimpaCampos(Self);
 
   {Libera a StringList da memória}
   FreeAndNil(strList);
@@ -229,6 +235,17 @@ end;
 procedure TFormJogo.AdicionarNovoDispositivo;
 begin
   ShowMessage('');
+end;
+
+procedure TFormJogo.LimpaCampos;
+var
+  i : Integer;
+begin
+  for i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[i] is TEdit then
+      (Self.Components[i] as TEdit).Text := '';
+  end;
 end;
 
 end.

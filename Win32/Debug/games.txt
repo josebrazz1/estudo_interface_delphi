@@ -1,26 +1,43 @@
 ----------------------------------------------------------------
-RE2
-01/01/2018
-Survival Horror
-Capcom
---------------------------------------------------------------------------------------------------------------------------------
-a
-a
-a
-a
-PC
-RAM: 16 GB  | Memória de Vídeo: 2 GB  | HD: 1000000 GB 
+Silent Hill
+01/01/1999
+Terror Psicológico
+Konami
+Plataforma: Console
+Requisito(s): PS1
 ----------------------------------------------------------------
-b
-b
-b
-b
-Plataforma: PC
-Requisito(s)RAM: 16 GB  | Memória de Vídeo: 2 GB  | HD: 1000000 GB 
+The Calisto Protocol
+15/12/2022
+Terror
+---
+Plataforma: Console
+Requisito(s): PS4
 ----------------------------------------------------------------
-Resident Evil 2
-01/01/2018
-Survival Horror
-Capcom
+Need For Speed
+20/12/2022
+Corrida
+EA Games
 Plataforma: PC
 Requisito(s): RAM: 16 GB  | Memória de Vídeo: 8 GB  | HD: 1000000 GB 
+----------------------------------------------------------------
+Resident Evil
+01/01/1998
+Survival Horror
+Capcom
+Plataforma: Console
+Requisito(s): PS1
+----------------------------------------------------------------
+Donkey Kong
+01/01/1990
+Plataforma
+Rare
+Plataforma: Console
+Requisito(s): Super Nintendo
+
+----------------------------------------------------------------
+Gran Turismo 2
+21/08/2000
+Corrida
+---
+Plataforma: Console
+Requisito(s): PS1

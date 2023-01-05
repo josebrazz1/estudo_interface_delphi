@@ -28,9 +28,9 @@ object FormJogo: TFormJogo
   object Label2: TLabel
     Left = 8
     Top = 116
-    Width = 51
+    Width = 52
     Height = 13
-    Caption = 'Dispositivo'
+    Caption = 'Plataforma'
   end
   object Button1: TButton
     Left = 8
@@ -41,7 +41,6 @@ object FormJogo: TFormJogo
     Caption = 'Ok'
     TabOrder = 0
     OnClick = Button1Click
-    ExplicitTop = 196
   end
   object txtNomeJogo: TEdit
     Left = 8
@@ -51,7 +50,6 @@ object FormJogo: TFormJogo
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
     TextHint = 'Nome do jogo'
-    ExplicitWidth = 267
   end
   object txtDtLancamento: TEdit
     Left = 8
@@ -61,7 +59,6 @@ object FormJogo: TFormJogo
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 2
     TextHint = 'Data de lan'#231'amento'
-    ExplicitWidth = 267
   end
   object txtGenero: TEdit
     Left = 8
@@ -71,7 +68,6 @@ object FormJogo: TFormJogo
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
     TextHint = 'G'#234'nero'
-    ExplicitWidth = 266
   end
   object txtDesenvolvedor: TEdit
     Left = 8
@@ -81,7 +77,6 @@ object FormJogo: TFormJogo
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
     TextHint = 'Desenvolvedor'
-    ExplicitWidth = 266
   end
   object cbRequisitos: TComboBox
     Left = 8
