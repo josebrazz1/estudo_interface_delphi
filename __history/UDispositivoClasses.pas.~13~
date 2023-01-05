@@ -1,0 +1,55 @@
+unit UDispositivoClasses;
+
+interface
+
+uses UDispositivoInterfaces;
+
+type
+  TDispositivo = class(TInterfacedObject, IDispositivo)
+  private
+    FNome : String;
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+  public
+    property Nome : string read GetNome write SetNome;
+  end;
+
+  TConsole = class(TDispositivo, IConsole)
+  private
+    FPortatil : Boolean;
+    FNovaGeracao : Boolean;
+
+    function GetPortatil : Boolean;
+    procedure SetPortatil(const Value : Boolean);
+
+    function GetNovaGeracao : Boolean;
+    procedure SetNovaGeracao(const Value : Boolean);
+  public
+    property Portatil : Boolean read GetPortatil write SetPortatil;
+    property NovaGeracao : Boolean read GetNovaGeracao write SetNovaGeracao;
+  end;
+
+  TPc = class(TDispositivo, IPc)
+  private
+    FMemRam : Integer;
+    FMemVideo : Integer;
+    FEspacoDisco : Integer;
+
+    function GetMemRam : Integer;
+    procedure SetMemRam(const Value : Integer);
+
+    function GetMemVideo : Integer;
+    procedure SetMemVideo(const Value : Integer);
+
+    function GetEspacoDisco : Integer;
+    procedure SetEspacoDisco(const Value : Integer);
+  public
+    property MemRam : Integer read GetMemRam write SetMemRam;
+    property MemVideo : Integer read GetMemVideo write SetMemVideo;
+    property EspacoDisco : Integer read GetEspacoDisco write SetEspacoDisco;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/01/03 13:30:22.000.427,=C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/01/03 13:30:49.000.366,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UInterfaces.dfm</Transaction>
+    <Transaction>2023/01/03 13:30:49.000.366,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UInterfaces.pas</Transaction>
+    <Transaction>2023/01/03 13:30:59.000.147,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Estudo_Interfaces.dproj</Transaction>
+    <Transaction>2023/01/03 13:33:02.000.290,=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/03 13:33:12.000.889,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UInterfaces.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/03 13:33:16.000.818,=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/03 13:33:23.000.433,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UClasses.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 15:12:47.000.422,=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 15:13:07.000.177,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UDispositivoInterfaces.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 15:13:14.000.672,=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 15:13:26.000.646,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UDispositivoClasses.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 16:15:58.000.335,=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+    <Transaction>2023/01/04 16:16:10.000.870,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UDispositivoForm.dfm=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.dfm</Transaction>
+    <Transaction>2023/01/04 16:16:10.000.870,C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\UDispositivoForm.pas=C:\Users\José Augusto Braz\Desktop\estudo_interface_delphi\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

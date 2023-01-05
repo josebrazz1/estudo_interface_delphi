@@ -1,0 +1,92 @@
+object FormJogo: TFormJogo
+  Left = 0
+  Top = 0
+  Caption = 'Jogo'
+  ClientHeight = 229
+  ClientWidth = 282
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  DesignSize = (
+    282
+    229)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 116
+    Width = 57
+    Height = 13
+    Caption = 'Requisito(s)'
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 196
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = 'Ok'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object txtNomeJogo: TEdit
+    Left = 8
+    Top = 8
+    Width = 267
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 1
+    TextHint = 'Nome do jogo'
+  end
+  object txtDtLancamento: TEdit
+    Left = 8
+    Top = 35
+    Width = 267
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 2
+    TextHint = 'Data de lan'#231'amento'
+  end
+  object txtGenero: TEdit
+    Left = 8
+    Top = 62
+    Width = 266
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 3
+    TextHint = 'G'#234'nero'
+  end
+  object txtDesenvolvedor: TEdit
+    Left = 8
+    Top = 89
+    Width = 266
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 4
+    TextHint = 'Desenvolvedor'
+  end
+  object cbDispositivo: TComboBox
+    Left = 8
+    Top = 135
+    Width = 235
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 5
+  end
+  object btnAbreDispositivoForm: TButton
+    Left = 249
+    Top = 133
+    Width = 25
+    Height = 25
+    Anchors = [akTop, akRight]
+    Caption = '...'
+    TabOrder = 6
+    OnClick = btnAbreDispositivoFormClick
+  end
+end

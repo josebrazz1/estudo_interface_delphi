@@ -1,0 +1,18 @@
+program Estudo_Interfaces;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {Form1},
+  UJogoInterfaces in 'UJogoInterfaces.pas',
+  UJogoClasses in 'UJogoClasses.pas',
+  UDispositivoInterfaces in 'UDispositivoInterfaces.pas',
+  UDispositivoClasses in 'UDispositivoClasses.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

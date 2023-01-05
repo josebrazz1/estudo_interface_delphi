@@ -1,0 +1,45 @@
+unit UDispositivoForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, inifiles;
+
+type
+  TFormDispositivo = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormDispositivo: TFormDispositivo;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormDispositivo.FormCreate(Sender: TObject);
+var
+  dispositivos : TIniFile;
+  nome : String;
+  memRam : Integer;
+  memVideo : Integer;
+  espacoDisco : Integer;
+begin
+  dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Dispositivos.ini');
+
+  nome := dispositivos.ReadString('PC1','nome','');
+  memRam := dispositivos.ReadString('PC1','memRam','');
+  memVideo := dispositivos.ReadString('PC1','memVideo','');
+  espacoDisco := dispositivos.ReadString('PC1','espacoDisco','');
+
+  ShowMessage(nome);
+
+  FreeAndNil(dispositivos);
+end;
+
+end.

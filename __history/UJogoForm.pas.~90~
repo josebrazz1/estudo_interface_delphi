@@ -1,0 +1,234 @@
+unit UJogoForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, inifiles;
+
+type
+  TFormJogo = class(TForm)
+    Button1: TButton;
+    txtNomeJogo: TEdit;
+    txtDtLancamento: TEdit;
+    txtGenero: TEdit;
+    txtDesenvolvedor: TEdit;
+    cbRequisitos: TComboBox;
+    btnAbreDispositivoForm: TButton;
+    Label1: TLabel;
+    cbDispositivo: TComboBox;
+    Label2: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure AdicionarNovoJogo(pNome, pDtLancamento, pGenero, pDesenvolvedor : String);
+    procedure AdicionarNovoDispositivo;
+    procedure btnAbreDispositivoFormClick(Sender: TObject);
+    procedure cbDispositivoChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormJogo: TFormJogo;
+
+implementation
+
+{$R *.dfm}
+
+uses UJogoInterfaces, UJogoClasses, UDispositivoForm;
+
+var
+  dispositivos : TIniFile;
+  iniSections : TStringList;
+  i, memRam, memVideo, espacoDisco : Integer;
+
+procedure TFormJogo.Button1Click(Sender: TObject);
+begin
+  AdicionarNovoJogo(txtNomeJogo.Text,
+    txtDtLancamento.Text,
+    txtGenero.Text,
+    txtDesenvolvedor.Text);
+end;
+
+procedure TFormJogo.cbDispositivoChange(Sender: TObject);
+begin
+  {Se a combo estiver no índice 0, ou seja, se estiver selecionado "PC"...}
+  if cbDispositivo.ItemIndex = 0 then
+    {...então seleciona o arquivo ini contendo as informações dos computadores}
+    dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini')
+  else
+    {...caso contrário, seleciona o ini contendo os nomes de consoles}
+    dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Consoles.ini');
+
+  {Instancia a StringList}
+  iniSections := TStringList.Create;
+
+  {Lê as seções do arquivo ini}
+  dispositivos.ReadSections(iniSections);
+
+  {Limpa a combo para novo preechimento}
+  cbRequisitos.Clear;
+
+  {Se o arquivo ini conter o trecho "PCs" então selleciona o respectivo ini}
+  if dispositivos.FileName.Contains('PCs.ini') then
+  begin
+    for i := 0 to iniSections.Create.Count - 1 do
+    begin
+      memRam := dispositivos.ReadInteger(iniSections.Strings[i],'memRam',0);
+      memVideo := dispositivos.ReadInteger(iniSections.Strings[i],'memVideo',0);
+      espacoDisco := dispositivos.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
+
+      cbRequisitos.Items.Add('RAM: ' + IntToStr(memRam) + ' GB ' +
+                                ' | Memória de Vídeo: ' + IntToStr(memVideo) + ' GB ' +
+                                ' | HD: ' + IntToStr(espacoDisco) + ' GB ');
+    end;
+  end
+  {Caso contrário seleciona o ini de Consoles}
+  else
+  begin
+    for i := 0 to iniSections.Create.Count - 1 do
+    begin
+      cbRequisitos.Items.Add(iniSections.Strings[i]);
+    end;
+  end;
+
+  {Posiciona a combo no primeiro item}
+  cbRequisitos.ItemIndex := 0;
+
+  {Limpa os objetos da memória}
+  FreeAndNil(iniSections);
+  FreeAndNil(dispositivos);
+end;
+
+procedure TFormJogo.FormCreate(Sender: TObject);
+var
+  nome : String;
+begin
+  {Habilita a opção de mostrar se houveram vazamentos de memória ao decorrer da
+  execução do programa}
+  ReportMemoryLeaksOnShutdown := True;
+
+  {Alimenta combo de dispositivos através no arquivo ini}
+  dispositivos := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'PCs.ini');
+
+  {nome := dispositivos.ReadString('PC1','nome','');
+  memRam := dispositivos.ReadInteger('PC1','memRam',0);
+  memVideo := dispositivos.ReadInteger('PC1','memVideo',0);
+  espacoDisco := dispositivos.ReadInteger('PC1','espacoDisco',0);}
+
+  iniSections := TStringList.Create;
+  dispositivos.ReadSections(iniSections);
+
+  for i := 0 to iniSections.Create.Count - 1 do
+  begin
+    memRam := dispositivos.ReadInteger(iniSections.Strings[i],'memRam',0);
+    memVideo := dispositivos.ReadInteger(iniSections.Strings[i],'memVideo',0);
+    espacoDisco := dispositivos.ReadInteger(iniSections.Strings[i],'espacoDisco',0);
+
+    cbRequisitos.Items.Add('RAM: ' + IntToStr(memRam) + ' GB ' +
+                            ' | Memória de Vídeo: ' + IntToStr(memVideo) + ' GB ' +
+                            ' | HD: ' + IntToStr(espacoDisco) + ' GB ');
+  end;
+
+  cbRequisitos.ItemIndex := 0;
+
+  FreeAndNil(iniSections);
+  FreeAndNil(dispositivos);
+end;
+
+procedure TFormJogo.AdicionarNovoJogo(pNome,
+  pDtLancamento, pGenero, pDesenvolvedor : String);
+var
+  jogo : IJogo;
+  genero : IGenero;
+  desenvolvedor : IDesenvolvedor;
+
+  flLinha, flConteudo, flPrimeiraLinha : String;
+
+  strList : TStringList;
+
+  fl : TextFile;
+
+  i : Integer;
+begin
+  {Cria os InterfacedObjects na memória, os quais não precisam ser destruídos.
+
+  Obs: Todos as classes que herdam de TInterfacedObject são liberados automaticamente}
+  jogo := TJogo.Create;
+  genero := TGenero.Create;
+  desenvolvedor := TDesenvolvedor.Create;
+
+  {Instancia a StringList}
+  strList := TStringList.Create;
+
+  {alimenta os objetos}
+  jogo.Nome := pNome;
+  jogo.DataLancamento := pDtLancamento;
+
+  jogo.Genero := genero;
+  jogo.Genero.Nome := pGenero;
+
+  jogo.Desenvolvedor := desenvolvedor;
+  jogo.Desenvolvedor.Nome := pDesenvolvedor;
+
+  {Mensagem informando as descrições que foram guardadas em arquivo}
+  {ShowMessage(jogo.Nome + #13#10 +
+              jogo.DataLancamento + #13#10 +
+              jogo.Genero.Nome + #13#10 +
+              jogo.Desenvolvedor.Nome);}
+
+  {adiciona os valores dos Edit's à StringList}
+  strList.Add(jogo.Nome);
+  strList.Add(jogo.DataLancamento);
+  strList.Add(jogo.Genero.Nome);
+  strList.Add(jogo.Desenvolvedor.Nome);
+
+  try
+    {Checa se o arquivo existe}
+    if FileExists(ExtractFilePath(ParamStr(0)) + '\' + 'games.txt') then
+    begin
+      {Se sim, o atribui à variável "fl"}
+      AssignFile(fl, ExtractFilePath(ParamStr(0)) + '\' + 'games.txt');
+      {abre o arquivo para edição no final}
+      Append(fl);
+
+      {Adiciona o separador}
+      Writeln(fl, '----------------------------------------------------------------');
+
+      {Escreve cada item da StringList no arquivo}
+      for i := 0 to strList.Count - 1 do
+        Writeln(fl, strList.Strings[i]);
+
+      Writeln(fl, 'Plataforma: ' + cbDispositivo.Text);
+      Writeln(fl, cbRequisitos.Text);
+
+      {Após terminar a escrita, fecha o arquivo}
+      CloseFile(fl);
+    end
+    else
+      {Se o arquivo não existir, o cria no local onde o executável do programa está}
+      strList.SaveToFile(ExtractFilePath(ParamStr(0)) + '\' + 'games.txt');
+  finally
+    FreeAndNil(strList);
+  end;
+
+  {Libera a StringList da memória}
+  FreeAndNil(strList);
+end;
+
+procedure TFormJogo.btnAbreDispositivoFormClick(Sender: TObject);
+var
+  dispositivoForm : TFormDispositivo;
+begin
+  dispositivoForm := TFormDispositivo.Create(Self);
+  dispositivoForm.Show;
+end;
+
+procedure TFormJogo.AdicionarNovoDispositivo;
+begin
+  ShowMessage('');
+end;
+
+end.

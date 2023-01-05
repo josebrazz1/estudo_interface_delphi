@@ -1,0 +1,67 @@
+object FormPrincipal: TFormPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'FormPrincipal'
+  ClientHeight = 150
+  ClientWidth = 256
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  DesignSize = (
+    256
+    150)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Button1: TButton
+    Left = 8
+    Top = 117
+    Width = 75
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = 'Ok'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object txtNomeJogo: TEdit
+    Left = 8
+    Top = 8
+    Width = 241
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 1
+    TextHint = 'Nome do jogo'
+  end
+  object txtDtLancamento: TEdit
+    Left = 8
+    Top = 35
+    Width = 241
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 2
+    TextHint = 'Data de lan'#231'amento'
+  end
+  object txtGenero: TEdit
+    Left = 8
+    Top = 62
+    Width = 240
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 3
+    TextHint = 'G'#234'nero'
+  end
+  object txtDesenvolvedor: TEdit
+    Left = 8
+    Top = 89
+    Width = 240
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 4
+    TextHint = 'Desenvolvedor'
+  end
+end

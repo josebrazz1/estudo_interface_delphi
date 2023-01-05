@@ -1,0 +1,43 @@
+unit UDispositivoInterfaces;
+
+interface
+
+type
+  IDispositivo = interface
+    ['{0FB2A576-6F1B-4435-A74A-FEF96FA3E922}']
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+
+    property Nome : string read GetNome write SetNome;
+  end;
+
+  IConsole = interface(IDispositivo)
+    ['{4D7BA8DD-0B58-446A-958A-D40A874CCD40}']
+
+    function GetPortatil : Boolean;
+    procedure SetPortatil(const Value : Boolean);
+
+    function GetNovaGeracao : Boolean;
+    procedure SetNovaGeracao(const Value : Boolean);
+
+    property isPortatil : Boolean read GetPortatil write SetPortatil;
+    property isNovaGeracao : Boolean read GetNovaGeracao write SetNovaGeracao;
+  end;
+
+  IPc = interface(IDispositivo)
+    ['{65EBFC34-6C43-4D55-94D4-3D46294A59EF}']
+
+    function GetQtdeMemoria : Integer;
+    procedure SetQtdeMemoria(const Value : Integer);
+
+    function GetQtdeEspacoDisco : Integer;
+    procedure SetQtdeEspacoDisco(const Value : Integer)
+
+    property QtdeMemoria : Integer read GetQtdeMemoria write SetQtdeMemoria;
+    property QtdeEspacoDisco : Integer read QtdeMemoria write SetQtdeEspacoDisco();
+  end;
+
+implementation
+
+end.

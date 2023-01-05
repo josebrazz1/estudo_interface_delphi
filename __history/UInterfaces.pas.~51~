@@ -1,0 +1,45 @@
+unit UInterfaces;
+
+interface
+
+type
+  IGenero = interface
+    ['{B4971A2D-39EC-4F41-8501-F5461F89DEDA}']
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+
+    property Nome : String read GetNome write SetNome;
+  end;
+
+  IDesenvolvedor = interface
+    ['{A1613081-A53B-419D-83FD-E8C0CD42C08B}']
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+
+    property Nome : String read GetNome write SetNome;
+  end;
+
+  IJogo = interface
+    ['{AA6F57D6-87BD-4DED-B6A8-342FBC8325F3}']
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+
+    function GetDataLancamento : TDateTime;
+    procedure SetDataLancamento(const Value : TDateTime);
+
+    function GetDesenvolvedor(Value : IDesenvolvedor) : IDesenvolvedor;
+
+    function GetGenero(Value : IGenero) : IGenero;
+
+    property Nome : String read GetNome write SetNome;
+    property DataLancamento :  TDateTime read GetDataLancamento write SetDataLancamento;
+    property Desenvolvedor : IDesenvolvedor read GetDesenvolvedor;
+    property Genero : IGenero read GetGenero;
+  end;
+
+implementation
+
+end.

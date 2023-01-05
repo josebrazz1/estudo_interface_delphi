@@ -1,0 +1,121 @@
+unit UDispositivoClasses;
+
+interface
+
+uses UDispositivoInterfaces;
+
+type
+  TDispositivo = class(TInterfacedObject, IDispositivo)
+  private
+    FNome : String;
+
+    function GetNome : String;
+    procedure SetNome(const Value : String);
+  public
+    property Nome : string read GetNome write SetNome;
+  end;
+
+  TConsole = class(TDispositivo, IConsole)
+  private
+    FPortatil : Boolean;
+    FNovaGeracao : Boolean;
+
+    function GetPortatil : Boolean;
+    procedure SetPortatil(const Value : Boolean);
+
+    function GetNovaGeracao : Boolean;
+    procedure SetNovaGeracao(const Value : Boolean);
+  public
+    property Portatil : Boolean read GetPortatil write SetPortatil;
+    property NovaGeracao : Boolean read GetNovaGeracao write SetNovaGeracao;
+  end;
+
+  TPc = class(TDispositivo, IPc)
+  private
+    FMemRam : Integer;
+    FMemVideo : Integer;
+    FEspacoDisco : Integer;
+
+    function GetMemRam : Integer;
+    procedure SetMemRam(const Value : Integer);
+
+    function GetMemVideo : Integer;
+    procedure SetMemVideo(const Value : Integer);
+
+    function GetEspacoDisco : Integer;
+    procedure SetEspacoDisco(const Value : Integer);
+  public
+    property MemRam : Integer read GetMemRam write SetMemRam;
+    property MemVideo : Integer read GetMemVideo write SetMemVideo;
+    property EspacoDisco : Integer read GetEspacoDisco write SetEspacoDisco;
+  end;
+
+implementation
+
+{ TDispositivo }
+
+function TDispositivo.GetNome: String;
+begin
+  Result := Self.FNome;
+end;
+
+procedure TDispositivo.SetNome(const Value: String);
+begin
+  Self.FNome := Value;
+end;
+
+{ TConsole }
+
+function TConsole.GetNovaGeracao: Boolean;
+begin
+  Result := Self.FNovaGeracao;
+end;
+
+function TConsole.GetPortatil: Boolean;
+begin
+  Result := Self.FPortatil;
+end;
+
+procedure TConsole.SetNovaGeracao(const Value: Boolean);
+begin
+  Self.FNovaGeracao := Value;
+end;
+
+procedure TConsole.SetPortatil(const Value: Boolean);
+begin
+  Self.FPortatil := Value;
+end;
+
+{ TPc }
+
+function TPc.GetEspacoDisco: Integer;
+begin
+  Result := Self.FEspacoDisco;
+end;
+
+function TPc.GetMemRam: Integer;
+begin
+  Result := Self.FMemRam;
+end;
+
+function TPc.GetMemVideo: Integer;
+begin
+  Result := Self.MemVideo;
+end;
+
+procedure TPc.SetEspacoDisco(const Value: Integer);
+begin
+
+end;
+
+procedure TPc.SetMemRam(const Value: Integer);
+begin
+
+end;
+
+procedure TPc.SetMemVideo(const Value: Integer);
+begin
+
+end;
+
+end.
